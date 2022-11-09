@@ -1,0 +1,5 @@
+web sockets used
+socket.io
+
+NEXT PROJECT
+fully function responsive app codewithharry
