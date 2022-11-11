@@ -1,14 +1,16 @@
-const io = require('socker.io')(8000)
+const io = require('socket.io')(8000)
 
-const users ={ };
+const users = {};
 
-io.on('connection',socket=>{
-    socket.on('user-joined', name=>{
-        user[socket.id]=name;
-        socket.broadcast.emit('user-joined');
+io.on('connection', socket => {
+
+    socket.on('new-user-joined', name => {
+        console.log("new user", name);
+        users[socket.id] = name;
+        socket.broadcast.emit('user-joined', name);
     });
 
-    socket.on('send', message=>{
-        socket.broadcast.emit('recieve',{message: message, name: user[socket.id]})
+    socket.on('send', message => {
+        socket.broadcast.emit('recieve', { message: message, name: users[socket.id] })
     });
 })
